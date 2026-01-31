@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cqow47bch5ocs"]
 
+[ext_resource type="Script" uid="uid://dt2ofan62emnk" path="res://main.gd" id="1_ig7tw"]
+
 [node name="Main" type="Control" unique_id=1920608088]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +9,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ig7tw")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1964423282]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.10453547, 0.3276561, 0.45268106, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1549142008]
 layout_mode = 1
@@ -19,3 +31,203 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1851912699]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=694729067]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "AI Neural Network"
+
+[node name="Controls_Results" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1756440259]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results" unique_id=1225537059]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer" unique_id=1896939595]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Randomize" type="Button" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer" unique_id=1739008686]
+layout_mode = 2
+text = "Randomize Weights"
+
+[node name="Validate" type="Button" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer" unique_id=1190951080]
+layout_mode = 2
+text = "Validate"
+
+[node name="StepTrain" type="Button" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer" unique_id=1905945178]
+layout_mode = 2
+text = "Train Step"
+
+[node name="AutoTrain" type="Button" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer" unique_id=21612984]
+layout_mode = 2
+text = "Auto Train"
+
+[node name="Results" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer" unique_id=1483502956]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Headers" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results" unique_id=838624932]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/Headers" unique_id=1336603641]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Input"
+
+[node name="Expected" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/Headers" unique_id=1141139455]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Expected"
+
+[node name="Output" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/Headers" unique_id=376381955]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Output"
+
+[node name="FalseFalse" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results" unique_id=105872551]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseFalse" unique_id=1931586329]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FALSE, FALSE"
+
+[node name="Expected" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseFalse" unique_id=1980055134]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FALSE"
+
+[node name="Output" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseFalse" unique_id=668009237]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UNKNOWN"
+
+[node name="FalseTrue" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results" unique_id=855906701]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseTrue" unique_id=169315332]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FALSE, TRUE"
+
+[node name="Expected" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseTrue" unique_id=1967518703]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TRUE"
+
+[node name="Output" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseTrue" unique_id=629557036]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UNKNOWN"
+
+[node name="TrueFalse" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results" unique_id=200489229]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse" unique_id=1927164481]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TRUE, FALSE"
+
+[node name="Expected" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse" unique_id=169593261]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TRUE"
+
+[node name="Output" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse" unique_id=996600066]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UNKNOWN"
+
+[node name="TrueTrue" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results" unique_id=1533956115]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue" unique_id=47120617]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TRUE, TRUE"
+
+[node name="Expected" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue" unique_id=562589508]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FALSE"
+
+[node name="Output" type="Label" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue" unique_id=2088595314]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UNKNOWN"
+
+[node name="Weights" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1874769350]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Weights" unique_id=1187666061]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer" unique_id=688729434]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Weights"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer" unique_id=841461519]
+layout_mode = 2
+
+[node name="Matrix1" type="GridContainer" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer" unique_id=1092003149]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="w11" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix1" unique_id=137013718]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "w11"
+
+[node name="w12" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix1" unique_id=145856233]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "w12"
+
+[node name="w21" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix1" unique_id=1665047747]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "w21"
+
+[node name="w22" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix1" unique_id=802900066]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "w22"
+
+[node name="Matrix2" type="GridContainer" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer" unique_id=1803230950]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="w1" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix2" unique_id=1643591663]
+layout_mode = 2
+text = "w1"
+
+[node name="w2" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix2" unique_id=1775056867]
+layout_mode = 2
+text = "w2"
