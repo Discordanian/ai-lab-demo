@@ -43,7 +43,7 @@ func _ready() -> void:
 	_auto_train_timer.one_shot = false
 	add_child(_auto_train_timer)
 	_auto_train_timer.timeout.connect(_on_auto_train_tick)
-
+	_on_validate_pressed()
 
 func _on_randomize_weights_pressed() -> void:
 	nn = NeuralNetwork.new(2, 2, 1)
@@ -57,6 +57,7 @@ func _on_step_train_pressed() -> void:
 		for i in range(4):
 			nn.train(inputs, targets)
 	_update_weight_labels()
+	_on_validate_pressed()
 
 
 func _on_validate_pressed() -> void:
