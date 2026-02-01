@@ -11,6 +11,9 @@ var nn: NeuralNetwork
 @onready var output_true_false: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse/Output
 @onready var output_true_true: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue/Output
 
+@export var epochs: int = 10
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,8 +32,9 @@ func _on_randomize_weights_pressed() -> void:
 func _on_step_train_pressed() -> void:
 	var inputs: Array = [[0.0, 0.0], [0.0, 1.0], [1.0, 0.0], [1.0, 1.0]]
 	var targets: Array = [[0.0], [1.0], [1.0], [0.0]]
-	for i in range(4):
-		nn.train(inputs, targets)
+	for e in range(epochs):
+		for i in range(4):
+			nn.train(inputs, targets)
 	_update_weight_labels()
 
 

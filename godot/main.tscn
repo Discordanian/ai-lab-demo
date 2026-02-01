@@ -98,6 +98,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Output"
 
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/Headers" unique_id=1276724444]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.7582796, 0.01438272, 6.738305e-07, 1)
+
 [node name="FalseFalse" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results" unique_id=105872551]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -116,6 +121,10 @@ text = "FALSE"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "UNKNOWN"
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseFalse" unique_id=1264550415]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="FalseTrue" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results" unique_id=855906701]
 layout_mode = 2
@@ -136,6 +145,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "UNKNOWN"
 
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseTrue" unique_id=1024727350]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="TrueFalse" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results" unique_id=200489229]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -155,6 +168,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "UNKNOWN"
 
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse" unique_id=266065058]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="TrueTrue" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results" unique_id=1533956115]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -173,6 +190,10 @@ text = "FALSE"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "UNKNOWN"
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue" unique_id=773506863]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Weights" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1874769350]
 layout_mode = 2
