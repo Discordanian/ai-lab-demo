@@ -5,6 +5,7 @@ var nn: NeuralNetwork
 @onready var matrix2: GridContainer = $MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix2
 @onready var randomize_button: Button = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer/Randomize
 @onready var validate_button: Button = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer/Validate
+@onready var step_train_button: Button = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer/StepTrain
 @onready var output_false_false: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseFalse/Output
 
 
@@ -14,10 +15,19 @@ func _ready() -> void:
 	_update_weight_labels()
 	randomize_button.pressed.connect(_on_randomize_weights_pressed)
 	validate_button.pressed.connect(_on_validate_pressed)
+	step_train_button.pressed.connect(_on_step_train_pressed)
 
 
 func _on_randomize_weights_pressed() -> void:
 	nn = NeuralNetwork.new(2, 2, 1)
+	_update_weight_labels()
+
+
+func _on_step_train_pressed() -> void:
+	var inputs: Array = [[0.0, 0.0], [0.0, 1.0], [1.0, 0.0], [1.0, 1.0]]
+	var targets: Array = [[0.0], [1.0], [1.0], [0.0]]
+	for i in range(4):
+		nn.train(inputs, targets)
 	_update_weight_labels()
 
 
