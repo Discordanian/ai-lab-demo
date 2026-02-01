@@ -6,13 +6,28 @@ var nn: NeuralNetwork
 @onready var randomize_button: Button = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer/Randomize
 @onready var validate_button: Button = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer/Validate
 @onready var step_train_button: Button = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer/StepTrain
+@onready var auto_train_button: Button = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer/AutoTrain
 @onready var output_false_false: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseFalse/Output
 @onready var output_false_true: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseTrue/Output
 @onready var output_true_false: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse/Output
 @onready var output_true_true: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue/Output
+@onready var expected_false_false: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseFalse/Expected
+@onready var expected_false_true: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseTrue/Expected
+@onready var expected_true_false: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse/Expected
+@onready var expected_true_true: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue/Expected
+@onready var color_rect_headers: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/Headers/ColorRect
+@onready var color_rect_false_false: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseFalse/ColorRect
+@onready var color_rect_false_true: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseTrue/ColorRect
+@onready var color_rect_true_false: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse/ColorRect
+@onready var color_rect_true_true: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue/ColorRect
 
-@export var epochs: int = 10
+const COLOR_GREEN := Color(0.2, 0.8, 0.2, 1.0)
+const COLOR_RED := Color(0.9, 0.2, 0.2, 1.0)
 
+@export var epochs: int = 1
+@export var tick_interval: float = 0.3
+
+var _auto_train_timer: Timer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +37,12 @@ func _ready() -> void:
 	randomize_button.pressed.connect(_on_randomize_weights_pressed)
 	validate_button.pressed.connect(_on_validate_pressed)
 	step_train_button.pressed.connect(_on_step_train_pressed)
+	auto_train_button.pressed.connect(_on_auto_train_pressed)
+
+	_auto_train_timer = Timer.new()
+	_auto_train_timer.one_shot = false
+	add_child(_auto_train_timer)
+	_auto_train_timer.timeout.connect(_on_auto_train_tick)
 
 
 func _on_randomize_weights_pressed() -> void:
@@ -47,6 +68,37 @@ func _on_validate_pressed() -> void:
 	output_true_false.text = "TRUE" if result_10[0][0] >= 0.5 else "FALSE"
 	var result_11: Array = nn.forward([[1.0, 1.0]])
 	output_true_true.text = "TRUE" if result_11[0][0] >= 0.5 else "FALSE"
+
+	var match_00: bool = output_false_false.text == expected_false_false.text
+	var match_01: bool = output_false_true.text == expected_false_true.text
+	var match_10: bool = output_true_false.text == expected_true_false.text
+	var match_11: bool = output_true_true.text == expected_true_true.text
+
+	color_rect_false_false.color = COLOR_GREEN if match_00 else COLOR_RED
+	color_rect_false_true.color = COLOR_GREEN if match_01 else COLOR_RED
+	color_rect_true_false.color = COLOR_GREEN if match_10 else COLOR_RED
+	color_rect_true_true.color = COLOR_GREEN if match_11 else COLOR_RED
+
+	var all_match: bool = match_00 and match_01 and match_10 and match_11
+	color_rect_headers.color = COLOR_GREEN if all_match else COLOR_RED
+
+
+func _on_auto_train_pressed() -> void:
+	_auto_train_timer.wait_time = tick_interval
+	_auto_train_timer.start()
+
+
+func _on_auto_train_tick() -> void:
+	_on_step_train_pressed()
+	_on_validate_pressed()
+	var all_pass: bool = (
+		output_false_false.text == expected_false_false.text
+		and output_false_true.text == expected_false_true.text
+		and output_true_false.text == expected_true_false.text
+		and output_true_true.text == expected_true_true.text
+	)
+	if all_pass:
+		_auto_train_timer.stop()
 
 
 func _update_weight_labels() -> void:
