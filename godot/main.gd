@@ -20,11 +20,12 @@ var nn: NeuralNetwork
 @onready var color_rect_false_true: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseTrue/ColorRect
 @onready var color_rect_true_false: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse/ColorRect
 @onready var color_rect_true_true: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue/ColorRect
+@onready var total_runs_label: Label = $MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TotalRuns
 
 const COLOR_GREEN := Color(0.2, 0.8, 0.2, 1.0)
 const COLOR_RED := Color(0.9, 0.2, 0.2, 1.0)
 
-@export var epochs: int = 2
+@export var epochs: int = 4
 @export var tick_interval: float = 0.3
 
 var _auto_train_timer: Timer
@@ -34,6 +35,7 @@ var _auto_train_timer: Timer
 func _ready() -> void:
 	nn = NeuralNetwork.new(2, 2, 1)
 	_update_weight_labels()
+	_update_total_runs_label()
 	randomize_button.pressed.connect(_on_randomize_weights_pressed)
 	validate_button.pressed.connect(_on_validate_pressed)
 	step_train_button.pressed.connect(_on_step_train_pressed)
@@ -48,6 +50,7 @@ func _ready() -> void:
 func _on_randomize_weights_pressed() -> void:
 	nn = NeuralNetwork.new(2, 2, 1)
 	_update_weight_labels()
+	_update_total_runs_label()
 
 
 func _on_step_train_pressed() -> void:
@@ -57,6 +60,7 @@ func _on_step_train_pressed() -> void:
 		for i in range(4):
 			nn.train(inputs, targets)
 	_update_weight_labels()
+	_update_total_runs_label()
 	_on_validate_pressed()
 
 
@@ -84,6 +88,10 @@ func _on_validate_pressed() -> void:
 	color_rect_headers.color = COLOR_GREEN if all_match else COLOR_RED
 
 
+func _update_total_runs_label() -> void:
+	total_runs_label.text = str(nn.get_training_runs())
+
+
 func _on_auto_train_pressed() -> void:
 	_auto_train_timer.wait_time = tick_interval
 	_auto_train_timer.start()
@@ -100,6 +108,7 @@ func _on_auto_train_tick() -> void:
 	)
 	if all_pass:
 		_auto_train_timer.stop()
+		print("Total training runs: ", nn.get_training_runs())
 
 
 func _update_weight_labels() -> void:

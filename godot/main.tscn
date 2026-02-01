@@ -266,3 +266,25 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_ig7tw")
 theme_override_font_sizes/font_size = 24
 text = "w2"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1703957207]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1374071484]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1668036318]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Training Runs:  "
+horizontal_alignment = 2
+
+[node name="TotalRuns" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1916318661]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"

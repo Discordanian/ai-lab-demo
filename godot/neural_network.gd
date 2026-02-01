@@ -1,12 +1,10 @@
 class_name NeuralNetwork
 extends RefCounted
 
-## A feedforward neural network with one hidden layer, matching nn.py behavior.
-## Uses sigmoid activation and trains via backpropagation (gradient descent).
-
 # Weight matrices: input_size x hidden_size, hidden_size x output_size
 var weights_input_hidden: Array = []  # Array of Array (2D)
 var weights_hidden_output: Array = []
+var training_runs: int = 0
 
 
 func _init(input_size: int, hidden_size: int, output_size: int) -> void:
@@ -14,9 +12,10 @@ func _init(input_size: int, hidden_size: int, output_size: int) -> void:
 	weights_input_hidden = _rand_matrix(input_size, hidden_size)
 	# weights_hidden_output: [hidden_size][output_size]
 	weights_hidden_output = _rand_matrix(hidden_size, output_size)
+	training_runs = 0
 
 
-# --- Activation ---
+# Maps floating point values to a value between 0 and 1.
 static func _sigmoid(x: float) -> float:
 	return 1.0 / (1.0 + exp(-x))
 
@@ -107,7 +106,6 @@ static func _add_matrix(a: Array, b: Array) -> Array:
 	return out
 
 
-# --- Public API ---
 
 ## Forward pass: inputs 2D array [samples][input_size], returns [samples][output_size].
 func forward(inputs: Array) -> Array:
@@ -125,9 +123,15 @@ func get_weights() -> Dictionary:
 		"hidden_output": weights_hidden_output
 	}
 
+func get_training_runs() -> int:
+	return training_runs
+
+func reset_training_runs() -> void:
+	training_runs = 0
 
 ## Train via backpropagation for a single pass. inputs/targets are 2D arrays.
 func train(inputs: Array, targets: Array) -> void:
+	training_runs += 1
 	var hidden_input: Array = _matmul(inputs, weights_input_hidden)
 	var hidden_output: Array = _sigmoid_matrix(hidden_input)
 	var output_input: Array = _matmul(hidden_output, weights_hidden_output)
