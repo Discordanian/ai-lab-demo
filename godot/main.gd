@@ -24,7 +24,7 @@ var nn: NeuralNetwork
 const COLOR_GREEN := Color(0.2, 0.8, 0.2, 1.0)
 const COLOR_RED := Color(0.9, 0.2, 0.2, 1.0)
 
-@export var epochs: int = 1
+@export var epochs: int = 2
 @export var tick_interval: float = 0.3
 
 var _auto_train_timer: Timer
@@ -117,8 +117,3 @@ func _update_weight_labels() -> void:
 		for j in hidden_output[i].size():
 			matrix2.get_child(idx).text = "%.4f" % hidden_output[i][j]
 			idx += 1
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
