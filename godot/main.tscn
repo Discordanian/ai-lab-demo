@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dt2ofan62emnk" path="res://main.gd" id="1_ig7tw"]
 
+[sub_resource type="SystemFont" id="SystemFont_ig7tw"]
+
 [node name="Main" type="Control" unique_id=1920608088]
 layout_mode = 3
 anchors_preset = 15
@@ -200,24 +202,32 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
 text = "w11"
 
 [node name="w12" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix1" unique_id=145856233]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
 text = "w12"
 
 [node name="w21" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix1" unique_id=1665047747]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
 text = "w21"
 
 [node name="w22" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix1" unique_id=802900066]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
 text = "w22"
 
 [node name="Matrix2" type="GridContainer" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer" unique_id=1803230950]
@@ -226,8 +236,12 @@ size_flags_horizontal = 3
 
 [node name="w1" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix2" unique_id=1643591663]
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
 text = "w1"
 
 [node name="w2" type="Label" parent="MarginContainer/VBoxContainer/Weights/VBoxContainer/HBoxContainer/Matrix2" unique_id=1775056867]
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
 text = "w2"

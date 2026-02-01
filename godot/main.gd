@@ -7,6 +7,9 @@ var nn: NeuralNetwork
 @onready var validate_button: Button = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer/Validate
 @onready var step_train_button: Button = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/VBoxContainer/StepTrain
 @onready var output_false_false: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseFalse/Output
+@onready var output_false_true: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/FalseTrue/Output
+@onready var output_true_false: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse/Output
+@onready var output_true_true: Label = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue/Output
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,10 +35,14 @@ func _on_step_train_pressed() -> void:
 
 
 func _on_validate_pressed() -> void:
-	var result: Array = nn.forward([[0.0, 0.0]])
-	var value: float = result[0][0]
-	print("Result: ", result)
-	output_false_false.text = "TRUE" if value >= 0.5 else "FALSE"
+	var result_00: Array = nn.forward([[0.0, 0.0]])
+	output_false_false.text = "TRUE" if result_00[0][0] >= 0.5 else "FALSE"
+	var result_01: Array = nn.forward([[0.0, 1.0]])
+	output_false_true.text = "TRUE" if result_01[0][0] >= 0.5 else "FALSE"
+	var result_10: Array = nn.forward([[1.0, 0.0]])
+	output_true_false.text = "TRUE" if result_10[0][0] >= 0.5 else "FALSE"
+	var result_11: Array = nn.forward([[1.0, 1.0]])
+	output_true_true.text = "TRUE" if result_11[0][0] >= 0.5 else "FALSE"
 
 
 func _update_weight_labels() -> void:
