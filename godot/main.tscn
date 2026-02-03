@@ -267,6 +267,56 @@ theme_override_fonts/font = SubResource("SystemFont_ig7tw")
 theme_override_font_sizes/font_size = 24
 text = "w2"
 
+[node name="Basis" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=2112161468]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Basis" unique_id=89756932]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Basis/VBoxContainer" unique_id=1551228577]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Basis"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Basis/VBoxContainer" unique_id=1094753684]
+layout_mode = 2
+
+[node name="BasisHidden" type="GridContainer" parent="MarginContainer/VBoxContainer/Basis/VBoxContainer/HBoxContainer" unique_id=865860316]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="basis1" type="Label" parent="MarginContainer/VBoxContainer/Basis/VBoxContainer/HBoxContainer/BasisHidden" unique_id=1775981514]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
+text = "basis1"
+
+[node name="basis2" type="Label" parent="MarginContainer/VBoxContainer/Basis/VBoxContainer/HBoxContainer/BasisHidden" unique_id=1594986168]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
+text = "basis2"
+
+[node name="BasisOutput" type="GridContainer" parent="MarginContainer/VBoxContainer/Basis/VBoxContainer/HBoxContainer" unique_id=1790750681]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="basisoutput" type="Label" parent="MarginContainer/VBoxContainer/Basis/VBoxContainer/HBoxContainer/BasisOutput" unique_id=1612664866]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
+text = "basis out"
+
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1703957207]
 layout_mode = 2
 size_flags_vertical = 3

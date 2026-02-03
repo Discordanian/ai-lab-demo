@@ -21,6 +21,8 @@ var nn: NeuralNetwork
 @onready var color_rect_true_false: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueFalse/ColorRect
 @onready var color_rect_true_true: ColorRect = $MarginContainer/VBoxContainer/Controls_Results/HBoxContainer/Results/TrueTrue/ColorRect
 @onready var total_runs_label: Label = $MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TotalRuns
+@onready var basis_hidden: GridContainer = $MarginContainer/VBoxContainer/Basis/VBoxContainer/HBoxContainer/BasisHidden
+@onready var basis_output: GridContainer = $MarginContainer/VBoxContainer/Basis/VBoxContainer/HBoxContainer/BasisOutput
 
 const COLOR_GREEN := Color(0.2, 0.8, 0.2, 1.0)
 const COLOR_RED := Color(0.9, 0.2, 0.2, 1.0)
@@ -115,8 +117,12 @@ func _update_weight_labels() -> void:
 	var weights: Dictionary = nn.get_weights()
 	var input_hidden: Array = weights["input_hidden"]
 	var hidden_output: Array = weights["hidden_output"]
+	var bias_hidden: Array = weights["bias_hidden"]
+	var bias_output: Array = weights["bias_output"]
 	print("Weights input_hidden: ", input_hidden)
 	print("Weights hidden_output: ", hidden_output)
+	print("Bias hidden: ", bias_hidden)
+	print("Bias output: ", bias_output)
 	var idx: int = 0
 	for i in input_hidden.size():
 		for j in input_hidden[i].size():
@@ -127,3 +133,7 @@ func _update_weight_labels() -> void:
 		for j in hidden_output[i].size():
 			matrix2.get_child(idx).text = "%.4f" % hidden_output[i][j]
 			idx += 1
+	for i in bias_hidden.size():
+		basis_hidden.get_child(i).text = "%.4f" % bias_hidden[i]
+	for i in bias_output.size():
+		basis_output.get_child(i).text = "%.4f" % bias_output[i]

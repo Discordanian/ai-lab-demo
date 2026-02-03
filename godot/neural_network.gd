@@ -4,6 +4,9 @@ extends RefCounted
 # Weight matrices: input_size x hidden_size, hidden_size x output_size
 var weights_input_hidden: Array = []  # Array of Array (2D)
 var weights_hidden_output: Array = []
+# Bias vectors: one per neuron in hidden layer and output layer
+var bias_hidden: Array = []   # 1D, length hidden_size
+var bias_output: Array = []   # 1D, length output_size
 var training_runs: int = 0
 
 
@@ -12,6 +15,8 @@ func _init(input_size: int, hidden_size: int, output_size: int) -> void:
 	weights_input_hidden = _rand_matrix(input_size, hidden_size)
 	# weights_hidden_output: [hidden_size][output_size]
 	weights_hidden_output = _rand_matrix(hidden_size, output_size)
+	bias_hidden = _rand_vector(hidden_size)
+	bias_output = _rand_vector(output_size)
 	training_runs = 0
 
 
@@ -32,6 +37,42 @@ static func _rand_matrix(rows: int, cols: int) -> Array:
 		for j in cols:
 			m[i].append(randf())
 	return m
+
+
+static func _rand_vector(size: int) -> Array:
+	var v: Array = []
+	for i in size:
+		v.append(randf())
+	return v
+
+
+static func _add_bias_to_rows(m: Array, bias: Array) -> Array:
+	# m: [rows][cols], bias: [cols]. Add bias to each row.
+	var out: Array = []
+	for i in m.size():
+		out.append([])
+		for j in m[i].size():
+			out[i].append(m[i][j] + bias[j])
+	return out
+
+
+static func _sum_columns(m: Array) -> Array:
+	# Sum each column -> 1D array of length cols (for bias gradient).
+	var cols: int = m[0].size()
+	var out: Array = []
+	for j in cols:
+		var s: float = 0.0
+		for i in m.size():
+			s += m[i][j]
+		out.append(s)
+	return out
+
+
+static func _add_vector(a: Array, b: Array) -> Array:
+	var out: Array = []
+	for i in a.size():
+		out.append(a[i] + b[i])
+	return out
 
 
 static func _matmul(a: Array, b: Array) -> Array:
@@ -110,17 +151,21 @@ static func _add_matrix(a: Array, b: Array) -> Array:
 ## Forward pass: inputs 2D array [samples][input_size], returns [samples][output_size].
 func forward(inputs: Array) -> Array:
 	var hidden_input: Array = _matmul(inputs, weights_input_hidden)
+	hidden_input = _add_bias_to_rows(hidden_input, bias_hidden)
 	var hidden_output: Array = _sigmoid_matrix(hidden_input)
 	var output_input: Array = _matmul(hidden_output, weights_hidden_output)
+	output_input = _add_bias_to_rows(output_input, bias_output)
 	var output: Array = _sigmoid_matrix(output_input)
 	return output
 
 
-## Returns all current weights as a Dictionary: "input_hidden" (2D Array), "hidden_output" (2D Array).
+## Returns all current weights as a Dictionary: "input_hidden", "hidden_output" (2D), "bias_hidden", "bias_output" (1D).
 func get_weights() -> Dictionary:
 	return {
 		"input_hidden": weights_input_hidden,
-		"hidden_output": weights_hidden_output
+		"hidden_output": weights_hidden_output,
+		"bias_hidden": bias_hidden,
+		"bias_output": bias_output
 	}
 
 func get_training_runs() -> int:
@@ -133,8 +178,10 @@ func reset_training_runs() -> void:
 func train(inputs: Array, targets: Array) -> void:
 	training_runs += 1
 	var hidden_input: Array = _matmul(inputs, weights_input_hidden)
+	hidden_input = _add_bias_to_rows(hidden_input, bias_hidden)
 	var hidden_output: Array = _sigmoid_matrix(hidden_input)
 	var output_input: Array = _matmul(hidden_output, weights_hidden_output)
+	output_input = _add_bias_to_rows(output_input, bias_output)
 	var output: Array = _sigmoid_matrix(output_input)
 
 	var error: Array = _sub_matrix(targets, output)
@@ -145,6 +192,10 @@ func train(inputs: Array, targets: Array) -> void:
 
 	var delta_ho: Array = _matmul(_transpose(hidden_output), d_output)
 	var delta_ih: Array = _matmul(_transpose(inputs), d_hidden)
+	var delta_bias_output: Array = _sum_columns(d_output)
+	var delta_bias_hidden: Array = _sum_columns(d_hidden)
 
 	weights_hidden_output = _add_matrix(weights_hidden_output, delta_ho)
 	weights_input_hidden = _add_matrix(weights_input_hidden, delta_ih)
+	bias_output = _add_vector(bias_output, delta_bias_output)
+	bias_hidden = _add_vector(bias_hidden, delta_bias_hidden)
