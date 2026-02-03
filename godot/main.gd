@@ -110,7 +110,7 @@ func _on_auto_train_tick() -> void:
 	)
 	if all_pass:
 		_auto_train_timer.stop()
-		print("Total training runs: ", nn.get_training_runs())
+		# print("Total training runs: ", nn.get_training_runs())
 
 
 func _update_weight_labels() -> void:
@@ -119,10 +119,10 @@ func _update_weight_labels() -> void:
 	var hidden_output: Array = weights["hidden_output"]
 	var bias_hidden: Array = weights["bias_hidden"]
 	var bias_output: Array = weights["bias_output"]
-	print("Weights input_hidden: ", input_hidden)
-	print("Weights hidden_output: ", hidden_output)
-	print("Bias hidden: ", bias_hidden)
-	print("Bias output: ", bias_output)
+	# print("Weights input_hidden: ", input_hidden)
+	# print("Weights hidden_output: ", hidden_output)
+	# print("Bias hidden: ", bias_hidden)
+	# print("Bias output: ", bias_output)
 	var idx: int = 0
 	for i in input_hidden.size():
 		for j in input_hidden[i].size():
