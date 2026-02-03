@@ -24,6 +24,7 @@ m -> slope
 
 b -> y intercept
 
+## Higher dimensions
 Adding more variables with slopes looks like this:
 
 y = m1 * x + m2 * z + b 
@@ -34,4 +35,5 @@ m2 -> z slope
 
 b -> y intercept
 
+# Moving the line around
 Without bias (b), the resulting line always goes through the Origin.  Think of bias as a way of shifting the line around to change the activation.
