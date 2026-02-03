@@ -15,8 +15,8 @@ func _init(input_size: int, hidden_size: int, output_size: int) -> void:
 	weights_input_hidden = _rand_matrix(input_size, hidden_size)
 	# weights_hidden_output: [hidden_size][output_size]
 	weights_hidden_output = _rand_matrix(hidden_size, output_size)
-	bias_hidden = _rand_vector(hidden_size)
-	bias_output = _rand_vector(output_size)
+	bias_hidden = _zero_vector(hidden_size)
+	bias_output = _zero_vector(output_size)
 	training_runs = 0
 
 
@@ -43,6 +43,13 @@ static func _rand_vector(size: int) -> Array:
 	var v: Array = []
 	for i in size:
 		v.append(randf() - 0.5)
+	return v
+
+
+static func _zero_vector(size: int) -> Array:
+	var v: Array = []
+	for i in size:
+		v.append(0.0)
 	return v
 
 
