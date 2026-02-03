@@ -21,6 +21,7 @@ Bias controls when a perceptron activates.
 y = mx + b
 
 m -> slope
+
 b -> y intercept
 
 Adding more variables with slopes looks like this:
@@ -28,7 +29,9 @@ Adding more variables with slopes looks like this:
 y = m1 * x + m2 * z + b 
 
 m1 -> x slope
+
 m2 -> z slope
+
 b -> y intercept
 
 Without bias (b), the resulting line always goes through the Origin.  Think of bias as a way of shifting the line around to change the activation.
