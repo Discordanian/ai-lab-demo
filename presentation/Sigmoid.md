@@ -11,3 +11,5 @@ The results of using this sigmoid function (aka: Logistic Function) is we get a 
 derivative.
 
 ![Derivative](images/Sigmoid_Formula_Derivative.png)
+
+#### Images from Wikipedia
