@@ -35,14 +35,14 @@ static func _rand_matrix(rows: int, cols: int) -> Array:
 	for i in rows:
 		m.append([])
 		for j in cols:
-			m[i].append(randf())
+			m[i].append(randf() - 0.5)
 	return m
 
 
 static func _rand_vector(size: int) -> Array:
 	var v: Array = []
 	for i in size:
-		v.append(randf())
+		v.append(randf() - 0.5)
 	return v
 
 
