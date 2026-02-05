@@ -26,5 +26,6 @@ This is where things get tricky.  You can actually have multiple levels of hidde
 and each hidden layer can be of a different size.  This is a seperate and more complicated science
 to trying to determine the optimal configuration for hidden layers.  
 
+Here are some general guidelines.  For datasets of < million, start with only 1-3 layers and each layer having around 32-256 perceptrons.
 
 
