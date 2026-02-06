@@ -68,6 +68,7 @@ for attempt in range(max_attempts):
         warm_start=False           # Start fresh each time
     )
     
+    # Train the data.    Forward pass, Loss calc, Backproagation, weight updates All of this is in a single call to `.fit()`
     mlp.fit(X, y)
     
     # Check if we achieved 100% accuracy
