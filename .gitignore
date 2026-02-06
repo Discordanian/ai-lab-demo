@@ -20,3 +20,4 @@ godot/.vscode/
 nn.py
 
 web/
+python/uv.lock
